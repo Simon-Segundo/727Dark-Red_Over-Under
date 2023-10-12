@@ -57,18 +57,28 @@ void reverseFor(int deg, int speed) {
 void OpenClaw() {
   int num = 0;
   if(num == 0) {
-    ClawOpen1.open();
-    ClawOpen2.open();
+    ClawOpen.open();
     num++;
   } else {
-    ClawOpen1.close();
-    ClawOpen2.close();
+    ClawOpen.close();
     num--;
   }
 }
 
 void turn180() {
-
+  set_spin(frontLeft, 75, 100, true);
+  set_spin(midLeft, 75, 100, true);
+  set_spin(rearLeft, 75, 100, true);
+  set_spin(frontRight, 75, 100, false);
+  set_spin(midRight, 75, 100, false);
+  set_spin(rearRight, 75, 100, false);
+  wait(1.5, sec);
+  frontLeft.stop();
+  midLeft.stop();
+  rearLeft.stop();
+  frontRight.stop();
+  midRight.stop();
+  rearRight.stop();
 }
 
 void autonomous(void) {

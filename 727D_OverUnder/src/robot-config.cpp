@@ -14,8 +14,7 @@ motor rearLeft = motor(PORT12, ratio18_1, true);
 motor frontRight = motor(PORT20, ratio18_1, false);
 motor midRight = motor(PORT18, ratio18_1, false);
 motor rearRight = motor(PORT19, ratio18_1, false);
-pneumatics ClawOpen1 = pneumatics(Brain.ThreeWirePort.A);
-pneumatics ClawOpen2 = pneumatics(Brain.ThreeWirePort.B);
+pneumatics ClawOpen = pneumatics(Brain.ThreeWirePort.A);
 controller Controller1 = controller(primary);
 
 // VEXcode generated functions

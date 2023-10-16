@@ -65,7 +65,7 @@ void OpenClaw() {
   }
 }
 
-void turn180() {
+void terminator() {
   set_spin(frontLeft, 75, 100, true);
   set_spin(midLeft, 75, 100, true);
   set_spin(rearLeft, 75, 100, true);
@@ -103,8 +103,8 @@ int main() {
   
   // Calls the OpenClaw function when button 'A' is pressed on the controller
   Controller1.ButtonA.pressed(OpenClaw);
-  // Calls the turn180 function when button 'R1' is pressed on the controller
-  Controller1.ButtonR1.pressed(turn180);
+  // Calls the terminator function when button 'R1' is pressed on the controller
+  Controller1.ButtonR1.pressed(terminator);
   // Sets the void autonomous to be run when autonomous mode begins
   Competition.autonomous(autonomous);
   // Sets the void userControl to be run when driver control mode begins

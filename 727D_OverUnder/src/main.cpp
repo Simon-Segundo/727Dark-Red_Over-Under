@@ -54,15 +54,24 @@ void reverseFor(int deg, int speed) {
   rearRight.spinFor(-deg, rotationUnits::deg, speed, velocityUnits::pct, false);
 }
 
-void OpenClaw() {
+void openClaw() {
   int num = 0;
   if(num == 0) {
-    ClawOpen.open();
+    clawOpen.open();
     num++;
   } else {
-    ClawOpen.close();
+    clawOpen.close();
     num--;
   }
+}
+
+void stopAllMotors() {
+  frontLeft.stop();
+  midLeft.stop();
+  rearLeft.stop();
+  frontRight.stop();
+  midRight.stop();
+  rearRight.stop();
 }
 
 void terminator() {
@@ -72,13 +81,8 @@ void terminator() {
   set_spin(frontRight, 75, 100, false);
   set_spin(midRight, 75, 100, false);
   set_spin(rearRight, 75, 100, false);
-  wait(1.5, sec);
-  frontLeft.stop();
-  midLeft.stop();
-  rearLeft.stop();
-  frontRight.stop();
-  midRight.stop();
-  rearRight.stop();
+  wait(1, sec);
+  stopAllMotors();
 }
 
 void autonomous(void) {
@@ -102,7 +106,7 @@ int main() {
   vexcodeInit();
   
   // Calls the OpenClaw function when button 'A' is pressed on the controller
-  Controller1.ButtonA.pressed(OpenClaw);
+  Controller1.ButtonA.pressed(openClaw);
   // Calls the terminator function when button 'R1' is pressed on the controller
   Controller1.ButtonR1.pressed(terminator);
   // Sets the void autonomous to be run when autonomous mode begins

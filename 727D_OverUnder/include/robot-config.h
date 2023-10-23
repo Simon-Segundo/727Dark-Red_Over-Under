@@ -9,6 +9,7 @@ extern motor rearLeft;
 extern motor frontRight;
 extern motor midRight;
 extern motor rearRight;
+extern motor puncher;
 extern pneumatics clawOpen;
 extern pneumatics clawDrop;
 extern controller Controller1;

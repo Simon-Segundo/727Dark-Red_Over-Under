@@ -85,6 +85,17 @@ void terminator() {
   stopAllMotors();
 }
 
+void falconPunch() {
+  int num = 0;
+  if(num == 0) {
+    puncher.spin(fwd);
+    num++;
+  } else {
+    puncher.stop();
+    num--;
+  }
+}
+
 void autonomous(void) {
 
 }
@@ -105,10 +116,12 @@ int main() {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
   
-  // Calls the OpenClaw function when button 'A' is pressed on the controller
+  // Calls the openClaw function when button 'A' is pressed on the controller
   Controller1.ButtonA.pressed(openClaw);
   // Calls the terminator function when button 'R1' is pressed on the controller
   Controller1.ButtonR1.pressed(terminator);
+  // Calls the falconPunch function when button 'B' is pressed on the controller
+  Controller1.ButtonB.pressed(falconPunch);
   // Sets the void autonomous to be run when autonomous mode begins
   Competition.autonomous(autonomous);
   // Sets the void userControl to be run when driver control mode begins

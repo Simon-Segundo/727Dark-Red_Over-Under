@@ -26,6 +26,8 @@ using namespace vex;
 // A global instance of competition
 competition Competition;
 
+int numf = 0;
+
 void set_spin(motor spin_motor, int Velocity, int Torque, bool fob) {
   spin_motor.setVelocity(Velocity, percent);
   spin_motor.setMaxTorque(Torque, percent);
@@ -55,13 +57,13 @@ void reverseFor(int deg, int speed) {
 }
 
 void openClaw() {
-  int num = 0;
-  if(num == 0) {
+  int numc = 0;
+  if(numc == 0) {
     clawOpen.open();
-    num++;
+    numc++;
   } else {
     clawOpen.close();
-    num--;
+    numc--;
   }
 }
 
@@ -86,13 +88,12 @@ void terminator() {
 }
 
 void falconPunch() {
-  int num = 0;
-  if(num == 0) {
-    puncher.spin(fwd);
-    num++;
+  if(numf == 0) {
+    puncher.spin(fwd, 75, velocityUnits::pct);
+    numf++;
   } else {
     puncher.stop();
-    num--;
+    numf--;
   }
 }
 

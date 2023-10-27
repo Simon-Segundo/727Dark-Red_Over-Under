@@ -95,7 +95,7 @@ void terminator() {
 // Punches tri-ball forward when tri-ball is placed on top of robot
 void falconPunch() {
   if(numf == 0) {
-    puncher.spin(fwd, 75, velocityUnits::pct);
+    puncher.spin(reverse, 20, velocityUnits::pct);
     numf++;
   } else {
     puncher.stop();

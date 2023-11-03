@@ -95,7 +95,7 @@ void terminator() {
 // Punches tri-ball forward when tri-ball is placed on top of robot
 void falconPunch() {
   if(numf == 0) {
-    puncher.spin(reverse, 15, velocityUnits::pct);
+    puncher.spin(fwd, 25, velocityUnits::pct);
     numf++;
   } else {
     puncher.stop();
@@ -105,7 +105,8 @@ void falconPunch() {
 
 // Code for autonomous period goes in this void
 void autonomous(void) {
-
+  puncher.spin(fwd, 25, velocityUnits::pct);
+  numf++;
 }
 
 // Code for drivercontrol period goes in this void

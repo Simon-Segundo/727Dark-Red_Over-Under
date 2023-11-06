@@ -28,7 +28,6 @@ using namespace vex;
 competition Competition;
 
 int numf = 0;
-int numc = 0;
 
 // Sets the velocity, torque, and the direction of the motor
 void set_spin(motor spin_motor, int Velocity, int Torque, bool fob) {
@@ -59,17 +58,6 @@ void reverseFor(int deg, int speed) {
   frontRight.spinFor(-deg, rotationUnits::deg, speed, velocityUnits::pct, false);
   midRight.spinFor(-deg, rotationUnits::deg, speed, velocityUnits::pct, false);
   rearRight.spinFor(-deg, rotationUnits::deg, speed, velocityUnits::pct, false);
-}
-
-// Opens/Closes the claw on the front of the robot
-void clawCtrl() {
-  if(numc == 0) {
-    clawOpen.open();
-    numc++;
-  } else {
-    clawOpen.close();
-    numc--;
-  }
 }
 
 // Stops all motors
@@ -119,9 +107,6 @@ void userControl(void) {
     frontRight.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis4.position(percent)), velocityUnits::pct);
     midRight.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis4.position(percent)), velocityUnits::pct);
     rearRight.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis4.position(percent)), velocityUnits::pct);
-
-    // Calls the openClaw function when button 'A' is pressed on the controller
-    Controller1.ButtonA.pressed(clawCtrl);
 
     // Calls the terminator function when button 'R1' is pressed on the controller
     Controller1.ButtonR1.pressed(terminator);

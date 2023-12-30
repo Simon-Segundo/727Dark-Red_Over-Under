@@ -1,7 +1,7 @@
 /*-------------------------- 727D_OverUnder INFO -----------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
-/*    Authors:      Alex, Elissa, Jack, Luca, Simon                           */
+/*    Authors:      Simon, Alex, Elissa, Jack, Luca                           */
 /*    Created:      Wed Sep 13 2023                                           */
 /*    Description:  727D Drive and Autonomous Code                            */
 /*                                                                            */
@@ -15,7 +15,9 @@
 // rearLeft             motor         12       //     
 // frontRight           motor         20       //     
 // midRight             motor         18       //     
-// rearRight            motor         19       //     
+// rearRight            motor         19       // 
+// Puncher              motor         17       //
+// Intake               motor         16       //    
 // Controller1          controller             //     
 // --------------------------------------------//
 

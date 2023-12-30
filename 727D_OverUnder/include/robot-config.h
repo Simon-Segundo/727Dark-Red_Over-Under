@@ -10,6 +10,7 @@ extern motor frontRight;
 extern motor midRight;
 extern motor rearRight;
 extern motor puncher;
+extern motor intake;
 extern controller Controller1;
 
 /**

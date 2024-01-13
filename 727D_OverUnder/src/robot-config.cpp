@@ -16,6 +16,8 @@ motor midRight = motor(PORT18, ratio18_1, false);
 motor rearRight = motor(PORT19, ratio18_1, false);
 motor puncher = motor(PORT17, ratio36_1, false);
 motor intake = motor(PORT16, ratio18_1, true);
+pneumatics rightWing = pneumatics();
+pneumtics leftWing = pneumatics();
 controller Controller1 = controller(primary);
 
 // VEXcode generated functions

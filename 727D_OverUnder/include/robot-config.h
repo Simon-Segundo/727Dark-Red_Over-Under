@@ -11,6 +11,8 @@ extern motor midRight;
 extern motor rearRight;
 extern motor puncher;
 extern motor intake;
+extern pneumatics rightWing;
+extern pneumatics leftWing;
 extern controller Controller1;
 
 /**

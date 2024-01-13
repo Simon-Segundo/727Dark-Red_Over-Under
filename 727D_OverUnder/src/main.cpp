@@ -95,20 +95,19 @@ void falconPunch() {
 
 // Code for autonomous period goes in this void
 void autonomous(void) {
-  puncher.spin(fwd, 25, velocityUnits::pct);
-  numf++;
+  puncher.spinFor();
 }
 
 // Code for drivercontrol period goes in this void
 void userControl(void) {
   while(1) {
     // Arcade steering using the left stick of the controller
-    frontLeft.spin(fwd, (Controller1.Axis3.position(percent) + Controller1.Axis4.position(percent)), velocityUnits::pct);
-    midLeft.spin(fwd, (Controller1.Axis3.position(percent) + Controller1.Axis4.position(percent)), velocityUnits::pct);
-    rearLeft.spin(fwd, (Controller1.Axis3.position(percent) + Controller1.Axis4.position(percent)), velocityUnits::pct);
-    frontRight.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis4.position(percent)), velocityUnits::pct);
-    midRight.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis4.position(percent)), velocityUnits::pct);
-    rearRight.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis4.position(percent)), velocityUnits::pct);
+    frontLeft.spin(fwd, (Controller1.Axis3.position(percent)/2 + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    midLeft.spin(fwd, (Controller1.Axis3.position(percent)/2 + Controller1.Axi1.position(percent))/2, velocityUnits::pct);
+    rearLeft.spin(fwd, (Controller1.Axis3.position(percent)/2 + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    frontRight.spin(fwd, (Controller1.Axis3.position(percent)/2 - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    midRight.spin(fwd, (Controller1.Axis3.position(percent)/2 - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    rearRight.spin(fwd, (Controller1.Axis3.position(percent)/2 - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
 
     // Calls the terminator function when button 'R1' is pressed on the controller
     Controller1.ButtonR1.pressed(terminator);

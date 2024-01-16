@@ -30,6 +30,9 @@ using namespace vex;
 competition Competition;
 
 int numf = 0;
+int numRW = 0;
+int numLW = 0;
+int switchDrive = 0;
 
 // Sets the velocity, torque, and the direction of the motor
 void set_spin(motor spin_motor, int Velocity, int Torque, bool fob) {
@@ -82,10 +85,32 @@ void terminator() {
   rearRight.spinFor(3, timeUnits::sec, 75, velocityUnits::pct);
 }
 
+// Right Wing Code
+void rightWingDown() {
+  if(numRW == 0) {
+    rightWing.open();
+    numRW++;
+  } else if(numRW == 1) {
+    rightWing.close();
+    numRW--;
+  }
+}
+
+// Left Wing Code
+void leftWingDown() {
+  if(numLW == 0) {
+    leftWing.open();
+    numLW++;
+  } else if(numLW == 1) {
+    leftWing.close();
+    numLW--;
+  }
+}
+
 // Punches tri-ball forward when tri-ball is placed on top of robot
 void falconPunch() {
   if(numf == 0) {
-    puncher.spin(fwd, 25, velocityUnits::pct);
+    puncher.spin(fwd, 30, velocityUnits::pct);
     numf++;
   } else {
     puncher.stop();
@@ -93,27 +118,62 @@ void falconPunch() {
   }
 }
 
+// Switches the way the drive code works
+// void switchDriving() {
+//   if(switchDrive == 0) {
+//     frontLeft.spin(fwd, (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+//     midLeft.spin(fwd, (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+//     rearLeft.spin(fwd, (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+//     frontRight.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+//     midRight.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+//     rearRight.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+
+//   } else if(switchDrive == 1){
+//     frontLeft.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+//     midLeft.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+//     rearLeft.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+//     frontRight.spin(fwd, (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+//     midRight.spin(fwd, (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+//     rearRight.spin(fwd, (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+//   }
+// }
+
 // Code for autonomous period goes in this void
 void autonomous(void) {
-  puncher.spinFor();
+  puncher.spinFor(fwd, 180, rotationUnits::deg);
 }
 
 // Code for drivercontrol period goes in this void
 void userControl(void) {
+  // Calls the falconPunch function when button 'B' is pressed on the controller
+  Controller1.ButtonB.pressed(falconPunch);
+
+  // Calls the rightWingDown function when button 'R1' is pressed on the controller
+  Controller1.ButtonR1.pressed(rightWingDown);
+
+  // Calls the leftWingDown function when button 'L1' is pressed on the controller
+  Controller1.ButtonL1.pressed(leftWingDown);
+
+  // Calls the switchDriving function when button 'Down' is pressed on the controller
+  // Controller1.ButtonDown.pressed(switchDriving);
+
   while(1) {
     // Arcade steering using the left stick of the controller
-    frontLeft.spin(fwd, (Controller1.Axis3.position(percent)/2 + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
-    midLeft.spin(fwd, (Controller1.Axis3.position(percent)/2 + Controller1.Axi1.position(percent))/2, velocityUnits::pct);
-    rearLeft.spin(fwd, (Controller1.Axis3.position(percent)/2 + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
-    frontRight.spin(fwd, (Controller1.Axis3.position(percent)/2 - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
-    midRight.spin(fwd, (Controller1.Axis3.position(percent)/2 - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
-    rearRight.spin(fwd, (Controller1.Axis3.position(percent)/2 - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    frontLeft.spin(fwd, (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    midLeft.spin(fwd, (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    rearLeft.spin(fwd, (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    frontRight.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    midRight.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    rearRight.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
 
-    // Calls the terminator function when button 'R1' is pressed on the controller
-    Controller1.ButtonR1.pressed(terminator);
-
-    // Calls the falconPunch function when button 'B' is pressed on the controller
-    Controller1.ButtonB.pressed(falconPunch);
+    // Allows the use of the intake using the 'R2' and 'L2' buttons
+    if(Controller1.ButtonL2.pressing()) {
+      intake.spin(fwd, 100, percentUnits::pct);
+    } else if(Controller1.ButtonR2.pressing()) {
+      intake.spin(reverse, 100, percentUnits::pct);
+    } else {
+      intake.stop();
+    }
   }
 }
 

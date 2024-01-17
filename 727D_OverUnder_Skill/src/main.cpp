@@ -140,7 +140,9 @@ void falconPunch() {
 
 // Code for autonomous period goes in this void
 void autonomous(void) {
-  puncher.spin(fwd, 30, velocityUnits::pct);
+  puncher.spin(fwd, 45, velocityUnits::pct);
+  wait(30, sec);
+  puncher.stop();
 }
 
 // Code for drivercontrol period goes in this void

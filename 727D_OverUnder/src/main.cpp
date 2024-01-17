@@ -17,7 +17,9 @@
 // midRight             motor         18       //     
 // rearRight            motor         19       // 
 // Puncher              motor         17       //
-// Intake               motor         16       //    
+// Intake               motor         16       //   
+// rightWing            pneumatics    A        //
+// leftWing             pneumatics    B        // 
 // Controller1          controller             //     
 // --------------------------------------------//
 
@@ -159,12 +161,12 @@ void userControl(void) {
 
   while(1) {
     // Arcade steering using the left stick of the controller
-    frontLeft.spin(fwd, (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
-    midLeft.spin(fwd, (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
-    rearLeft.spin(fwd, (Controller1.Axis3.position(percent) + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
-    frontRight.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
-    midRight.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
-    rearRight.spin(fwd, (Controller1.Axis3.position(percent) - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    frontLeft.spin(fwd, (Controller1.Axis3.position(percent)*2 + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    midLeft.spin(fwd, (Controller1.Axis3.position(percent)*2 + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    rearLeft.spin(fwd, (Controller1.Axis3.position(percent)*2 + Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    frontRight.spin(fwd, (Controller1.Axis3.position(percent)*2 - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    midRight.spin(fwd, (Controller1.Axis3.position(percent)*2 - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
+    rearRight.spin(fwd, (Controller1.Axis3.position(percent)*2 - Controller1.Axis1.position(percent))/2, velocityUnits::pct);
 
     // Allows the use of the intake using the 'R2' and 'L2' buttons
     if(Controller1.ButtonL2.pressing()) {
@@ -174,6 +176,7 @@ void userControl(void) {
     } else {
       intake.stop();
     }
+
   }
 }
 

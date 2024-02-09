@@ -245,18 +245,20 @@ void autonomous(void) {
 
 void usercontrol(void) {
   // User control code here, inside the loop
+
+  // Calls the falconPunch function when button 'B' is pressed on the controller
+  Controller1.ButtonB.pressed(falconPunch);
+
+  // Calls the rightWingDown function when button 'L1' is pressed on the controller
+  Controller1.ButtonL1.pressed(rightWingDown);
+
+  // Calls the leftWingDown function when button 'R1' is pressed on the controller
+  Controller1.ButtonR1.pressed(leftWingDown);
+  
   while (1) {
     // This is the main execution loop for the user control program.
     // Each time through the loop your program should update motor + servo
     // values based on feedback from the joysticks.
-    // Calls the falconPunch function when button 'B' is pressed on the controller
-    Controller1.ButtonB.pressed(falconPunch);
-
-    // Calls the rightWingDown function when button 'L1' is pressed on the controller
-    Controller1.ButtonL1.pressed(rightWingDown);
-
-    // Calls the leftWingDown function when button 'R1' is pressed on the controller
-    Controller1.ButtonR1.pressed(leftWingDown);
 
     // Allows the use of the intake using the 'R2' and 'L2' buttons
     if(Controller1.ButtonL2.pressing()) {

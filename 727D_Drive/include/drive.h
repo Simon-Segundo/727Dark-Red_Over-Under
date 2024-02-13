@@ -16,6 +16,8 @@ private:
   float SidewaysTracker_center_distance;
   float SidewaysTracker_diameter;
   float SidewaysTracker_in_to_deg_ratio;
+  vex::triport ThreeWire = vex::triport(vex::PORT22);
+  gyro myGyro = vex::gyro(Brain.ThreeWirePort.H);
 
 public: 
   drive_setup drive_setup = ZERO_TRACKER_NO_ODOM;

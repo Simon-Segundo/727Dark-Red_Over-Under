@@ -401,8 +401,8 @@ void Drive::holonomic_drive_to_point(float X_position, float Y_position, float a
 void Drive::control_arcade(){
   float throttle = deadband(controller(primary).Axis3.value(), 5);
   float turn = deadband(controller(primary).Axis1.value(), 5);
-  leftDrivetrain.spin(fwd, to_volt(throttle+turn/1.5), volt);
-  rightDrivetrain.spin(fwd, to_volt(throttle-turn/1.5), volt);
+  leftDrivetrain.spin(fwd, to_volt(throttle+turn/1.2), volt);
+  rightDrivetrain.spin(fwd, to_volt(throttle-turn/1.2), volt);
 }
 
 void Drive::control_holonomic(){

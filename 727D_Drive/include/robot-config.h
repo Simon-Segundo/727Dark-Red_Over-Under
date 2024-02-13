@@ -16,7 +16,6 @@ extern motor_group rightDrivetrain;
 extern pneumatics rightWing;
 extern pneumatics leftWing;
 extern controller Controller1;
-extern vex::triport ThreeWire = vex::triport(vex::PORT22);
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
